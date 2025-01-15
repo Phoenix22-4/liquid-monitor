@@ -33,7 +33,7 @@ async function fetchData() {
 }
 
 function openThinger() {
-    window.open('https://thinger.io/console/dashboards/liquid_dashboard', '_blank');
+    window.open('https://console.thinger.io/console/dashboards/liquid_dashboard', '_blank');
 }
 
 setInterval(fetchData, 2000);
