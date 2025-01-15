@@ -1,4 +1,4 @@
-const correctPassword = "water200";
+const correctPassword = "your_password";
 
 function validatePassword() {
     const inputPassword = document.getElementById("password").value;
