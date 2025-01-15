@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #FFFAFA;
+}
+
+#container {
+    display: none;
+    margin-top: 20px;
+}
+
+#tankLevel {
+    background-color: #87CEEB;
+    width: 50px;
+    height: 0;
+    margin: 0 auto;
+    transition: height 0.5s;
+}
+
+.warning {
+    color: red;
+}
+
+.header {
+    background-color: #FFD700;
+    color: white;
+    padding: 10px 0;
+}
+
+.password-section {
+    margin: 20px 0;
+}
