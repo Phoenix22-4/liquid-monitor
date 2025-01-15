@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    background-color: #FFFAFA;
 }
 
 #container {
@@ -10,7 +10,7 @@ body {
 }
 
 #tankLevel {
-    background-color: #007BFF;
+    background-color: #87CEEB;
     width: 50px;
     height: 0;
     margin: 0 auto;
@@ -22,7 +22,7 @@ body {
 }
 
 .header {
-    background-color: #333;
+    background-color: #FFD700;
     color: white;
     padding: 10px 0;
 }
