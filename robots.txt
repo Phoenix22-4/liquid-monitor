@@ -1,1 +1,5 @@
-ggg
+User-agent: *
+Disallow:
+
+Sitemap: https://phoenix22-4.github.io/liquid-monitor/sitemap.xml
+
