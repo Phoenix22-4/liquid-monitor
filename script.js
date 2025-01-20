@@ -10,26 +10,37 @@ function validatePassword() {
 }
 
 async function fetchData() {
-    const sensorDataResponse = await fetch('https://api.thinger.io/v1/users/mwamboa/devices/liquid-monitar/sensorData?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJsaXF1aWQtbW9uaXRvciIsImlhdCI6MTczNjk3NTkwMSwianRpIjoiNjc4ODI2MWRkN2QyM2E2ODY4MDVmZDE2Iiwic3ZyIjoiZXUtY2VudHJhbC5hd3MudGhpbmdlci5pbyIsInVzciI6Im13YW1ib2EifQ.0gYbEHXJIHBakpxIy9SUvTPsLsVCKDtcsKqJplxjFn4');
+    const sensorDataResponse = await fetch('https://backend.thinger.io/v3/users/mwamboa/devices/liquid-monitor/resources/sensor_data', {
+        headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzczNTM2MTgsImlhdCI6MTczNzM0NjQxOCwicm9sZSI6InVzZXIiLCJ1c3IiOiJtd2FtYm9hIn0.bF6AdaRZWuFLwsgvWKjVwCKp98A27IDOF97KopCr47U"
+        }
+    });
     const sensorData = await sensorDataResponse.json();
 
-    const warningResponse = await fetch('https://api.thinger.io/v1/users/mwamboa/devices/liquid-monitar/warningMessage?authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXYiOiJsaXF1aWQtbW9uaXRvciIsImlhdCI6MTczNjk3NTkwMSwianRpIjoiNjc4ODI2MWRkN2QyM2E2ODY4MDVmZDE2Iiwic3ZyIjoiZXUtY2VudHJhbC5hd3MudGhpbmdlci5pbyIsInVzciI6Im13YW1ib2EifQ.0gYbEHXJIHBakpxIy9SUvTPsLsVCKDtcsKqJplxjFn4');
+    const warningResponse = await fetch('https://backend.thinger.io/v3/users/mwamboa/devices/liquid-monitor/resources/warning_message', {
+        headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzczNTM2MTgsImlhdCI6MTczNzM0NjQxOCwicm9sZSI6InVzZXIiLCJ1c3IiOiJtd2FtYm9hIn0.bF6AdaRZWuFLwsgvWKjVwCKp98A27IDOF97KopCr47U"
+        }
+    });
     const warningData = await warningResponse.json();
 
     document.getElementById('level').textContent = sensorData.level;
-    document.getElementById('temp').textContent = sensorData.temp;
+    document.getElementById('temp').textContent = sensorData.temperature;
     document.getElementById('pressure').textContent = sensorData.pressure;
-
-    if (warningData && warningData.toString().includes("Critical")) {
-        document.getElementById('warning').textContent = warningData;
-    } else {
-        document.getElementById('warning').textContent = "";
-    }
+    document.getElementById('warning').textContent = warningData.includes("Critical") ? warningData : "";
 
     // Update tank level visualization
-    const tankLevel = document.getElementById("tankLevel");
+    const tankLevel = document.getElementById("waterLevel");
     const height = Math.max(10, Math.min(100, sensorData.level)); // Limit the height for visualization
     tankLevel.style.height = height + "%";
+}
+
+function openThinger() {
+    window.open('https://console.thinger.io/console/dashboards/liquid_dashboard', '_blank');
+}
+
+setInterval(fetchData, 60000);  // Update every minute (60000 milliseconds)
+
 }
 
 function openThinger() {
